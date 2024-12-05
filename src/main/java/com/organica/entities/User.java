@@ -2,9 +2,7 @@ package com.organica.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,9 +12,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Data
+@Setter
+@Getter
 @Entity
 @NoArgsConstructor
-@Data
+@AllArgsConstructor
 @ToString
 public class User implements UserDetails {
 

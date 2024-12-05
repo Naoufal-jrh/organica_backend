@@ -8,7 +8,6 @@ import lombok.ToString;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
 @Data
 @ToString
 public class Product {
