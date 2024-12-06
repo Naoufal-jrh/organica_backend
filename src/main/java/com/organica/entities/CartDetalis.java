@@ -10,8 +10,6 @@ import lombok.ToString;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
 @ToString
 public class CartDetalis {
