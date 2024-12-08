@@ -1,16 +1,20 @@
 package com.organica.payload;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class ApiResponse {
 
     private String Message;
 
+    public ApiResponse(String message) {
+        Message = message;
+    }
 
+    public ApiResponse(){}
+
+    public String getMessage() {
+        return Message;
+    }
+
+    public void setMessage(String message) {
+        Message = message;
+    }
 }

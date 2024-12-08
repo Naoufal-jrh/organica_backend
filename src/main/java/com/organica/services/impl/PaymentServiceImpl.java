@@ -2,10 +2,6 @@ package com.organica.services.impl;
 
 import com.organica.payload.PaymentDetails;
 import com.organica.services.PaymentService;
-import com.razorpay.Order;
-import com.razorpay.RazorpayClient;
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,6 +21,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public PaymentDetails CreateOrder(Double amount) {
+        /*
         try{
             JSONObject jsonObject=new JSONObject();
             jsonObject.put("amount",amount*100.0);
@@ -43,16 +40,22 @@ public class PaymentServiceImpl implements PaymentService {
         }catch (Exception e){
             System.out.println(e);
         }
+         */
         return null;
     }
 
-
+/*
     private PaymentDetails prepatreTransaction(Order order){
+
         String orderId=order.get("id");
         Integer amount=order.get("amount");
         String currency=order.get("currency");
 
         PaymentDetails paymentDetails=new PaymentDetails(orderId,amount,currency,KEY);
         return paymentDetails;
+
+
     }
+
+ */
 }

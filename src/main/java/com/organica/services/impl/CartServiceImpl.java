@@ -1,7 +1,7 @@
 package com.organica.services.impl;
 
 import com.organica.entities.Cart;
-import com.organica.entities.CartDetalis;
+import com.organica.entities.CartDetails;
 import com.organica.entities.Product;
 import com.organica.entities.User;
 import com.organica.payload.*;
@@ -62,7 +62,7 @@ public class CartServiceImpl implements CartService {
 
         //create cart detail
 
-        CartDetalis cartDetalis = new CartDetalis();
+        CartDetails cartDetalis = new CartDetails();
         cartDetalis.setProducts(product);
         cartDetalis.setQuantity(quantity);
         cartDetalis.setAmount((int) (product.getPrice()*quantity));
@@ -77,16 +77,16 @@ public class CartServiceImpl implements CartService {
 
 
 
-            CartDetalis cartDetalis1= new CartDetalis();
+            CartDetails cartDetalis1= new CartDetails();
             cartDetalis1.setQuantity(quantity);
             cartDetalis1.setProducts(product);
             cartDetalis1.setAmount((int) (product.getPrice()*quantity));
             totalAmount2= cartDetalis1.getAmount();
 
 
-            List<CartDetalis> pro=cart.getCartDetalis();
+            List<CartDetails> pro=cart.getCartDetails();
             pro.add(cartDetalis1);
-            cart1.setCartDetalis(pro);
+            cart1.setCartDetails(pro);
             cart1.setTotalAmount(totalAmount2);
             cartDetalis1.setCart(cart1);
 
@@ -95,14 +95,14 @@ public class CartServiceImpl implements CartService {
 //                p.setImg(decompressBytes(p.getImg()));
 //            }
             CartDto map = this.modelMapper.map(cart1, CartDto.class);
-            List<CartDetailDto> cartDetalis2 = map.getCartDetalis();
+            List<CartDetailDto> cartDetalis2 = map.getCartDetails();
 
 
             for (CartDetailDto i:cartDetalis2 ) {
                 ProductDto p=i.getProducts();
                 p.setImg(decompressBytes(p.getImg()));
             }
-            map.setCartDetalis(cartDetalis2);
+            map.setCartDetails(cartDetalis2);
             return map;
 
 
@@ -112,11 +112,11 @@ public class CartServiceImpl implements CartService {
         cartDetalis.setCart(cart);
 
 
-        List<CartDetalis> list=cart.getCartDetalis();
+        List<CartDetails> list=cart.getCartDetails();
 
         AtomicReference<Boolean> flag=new AtomicReference<>(false);
 
-        List<CartDetalis> newProduct = list.stream().map((i) -> {
+        List<CartDetails> newProduct = list.stream().map((i) -> {
             if (i.getProducts().getProductId() == productId) {
                 i.setQuantity(quantity);
                 i.setAmount((int) (i.getQuantity() * product.getPrice()));
@@ -138,20 +138,20 @@ public class CartServiceImpl implements CartService {
             list.add(cartDetalis);
 
         }
-        cart.setCartDetalis(list);
+        cart.setCartDetails(list);
         cart.setTotalAmount(totalAmount.get());
         System.out.println(cart.getTotalAmount());
         Cart save = this.cartRepo.save(cart);
 
         CartDto map = this.modelMapper.map(save, CartDto.class);
-        List<CartDetailDto> cartDetalis1 = map.getCartDetalis();
+        List<CartDetailDto> cartDetalis1 = map.getCartDetails();
 
 
         for (CartDetailDto i:cartDetalis1 ) {
             ProductDto p=i.getProducts();
             p.setImg(decompressBytes(p.getImg()));
         }
-        map.setCartDetalis(cartDetalis1);
+        map.setCartDetails(cartDetalis1);
         return map;
     }
 
@@ -164,14 +164,14 @@ public class CartServiceImpl implements CartService {
 
     // img decompressBytes
         CartDto map = this.modelMapper.map(byUser, CartDto.class);
-        List<CartDetailDto> cartDetalis1 = map.getCartDetalis();
+        List<CartDetailDto> cartDetalis1 = map.getCartDetails();
 
 
         for (CartDetailDto i:cartDetalis1 ) {
             ProductDto p=i.getProducts();
             p.setImg(decompressBytes(p.getImg()));
         }
-        map.setCartDetalis(cartDetalis1);
+        map.setCartDetails(cartDetalis1);
         return map;
     }
 
@@ -182,7 +182,7 @@ public class CartServiceImpl implements CartService {
         Product product = this.productRepo.findById(ProductId).orElseThrow();
         Cart cart =this.cartRepo.findByUser(user);
 
-        CartDetalis byProductsAndCart = this.cartDetailsRepo.findByProductsAndCart(product, cart);
+        CartDetails byProductsAndCart = this.cartDetailsRepo.findByProductsAndCart(product, cart);
         int amount = byProductsAndCart.getAmount();
         cart.setTotalAmount(cart.getTotalAmount()-amount);
         this.cartRepo.save(cart);

@@ -1,16 +1,11 @@
 package com.organica.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.util.List;
 
 @Entity
-@Data
-@ToString
+@Table(name = "cart")
 public class Cart {
 
     @Id
@@ -18,15 +13,51 @@ public class Cart {
     private int Id;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
     private float TotalAmount;
 
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "cart")
-    private List<CartDetalis> cartDetalis;
+    private List<CartDetails> cartDetails;
 
-
-    public void setCartDetalis(List<CartDetalis> pro) {
+    public Cart(int id, User user, float totalAmount, List<CartDetails> cartDetails) {
+        Id = id;
+        this.user = user;
+        TotalAmount = totalAmount;
+        this.cartDetails = cartDetails;
     }
+    public Cart(){}
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public float getTotalAmount() {
+        return TotalAmount;
+    }
+
+    public void setTotalAmount(float totalAmount) {
+        TotalAmount = totalAmount;
+    }
+
+    public List<CartDetails> getCartDetails() {
+        return cartDetails;
+    }
+
+    public void setCartDetails(List<CartDetails> cartDetails) {
+        this.cartDetails = cartDetails;
+    }
+
 }

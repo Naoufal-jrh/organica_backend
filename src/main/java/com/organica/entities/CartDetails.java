@@ -1,21 +1,30 @@
-package com.organica.payload;
+package com.organica.entities;
 
 
-public class CartDetailDto {
+import jakarta.persistence.*;
 
+@Entity
+public class CartDetails {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int CartDetailsId;
-    private ProductDto products;
+
+    @ManyToOne
+    private Product products;
     private int Quantity;
     private int Amount;
 
-    public CartDetailDto(int cartDetailsId, ProductDto products, int quantity, int amount) {
+    @ManyToOne
+    private Cart cart;
+
+    public CartDetails(int cartDetailsId, Product products, int quantity, int amount, Cart cart) {
         CartDetailsId = cartDetailsId;
         this.products = products;
         Quantity = quantity;
         Amount = amount;
+        this.cart = cart;
     }
-
-    public CartDetailDto(){}
+    public CartDetails(){}
 
     public int getCartDetailsId() {
         return CartDetailsId;
@@ -25,11 +34,11 @@ public class CartDetailDto {
         CartDetailsId = cartDetailsId;
     }
 
-    public ProductDto getProducts() {
+    public Product getProducts() {
         return products;
     }
 
-    public void setProducts(ProductDto products) {
+    public void setProducts(Product products) {
         this.products = products;
     }
 
@@ -47,5 +56,13 @@ public class CartDetailDto {
 
     public void setAmount(int amount) {
         Amount = amount;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }
