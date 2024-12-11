@@ -3,7 +3,7 @@ spring:
     name: organica
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/organica
+    url: jdbc:mysql://organica-mysql:3306/organica
     username: user
     password: password
   jpa:
