@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HealthCheckController {
     @GetMapping("/")
     public String echo(){
-        return "<h1>All is good so far</h2>";
+        return "<h1>All is good so far v2</h2>";
     }
 }
