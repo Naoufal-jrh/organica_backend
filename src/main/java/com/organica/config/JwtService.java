@@ -79,7 +79,7 @@ public class JwtService {
                 .getBody();
     }
 
-    private Key getSingInKey() {
+    Key getSingInKey() {
         byte[] keyByte= Decoders.BASE64.decode(KEY);
         return Keys.hmacShaKeyFor(keyByte);
     }
