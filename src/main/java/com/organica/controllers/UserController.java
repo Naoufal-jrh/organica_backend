@@ -18,8 +18,9 @@ public class UserController {
     private UserService userService;
 
 
-    @PostMapping("/singup")
+    @PostMapping("/signup")
     public ResponseEntity<UserDto> CreateUser(@RequestBody UserDto userDto){
+
 
         UserDto userDto1 = this.userService.CreateUser(userDto);
 
